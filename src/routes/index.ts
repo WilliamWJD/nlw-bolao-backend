@@ -1,9 +1,8 @@
 import { Router } from 'express';
+import { PoolRoutes } from '../modules/pool/routes/PoolRoutes';
 
 const routes = Router();
 
-routes.get('/pools/count', (req, res) => {
-    return res.json({ ok: true })
-});
+routes.use('/pools', PoolRoutes);
 
 export { routes }
