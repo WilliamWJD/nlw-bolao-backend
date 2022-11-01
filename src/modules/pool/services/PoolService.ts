@@ -4,7 +4,7 @@ const poolRepository = new PoolRepository();
 
 class PoolService {
     async execute() {
-        return await poolRepository.findAll();
+        return await poolRepository.findAllCount();
     }
 }
 
