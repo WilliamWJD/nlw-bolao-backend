@@ -1,10 +1,13 @@
 import { Router } from 'express';
-import { PoolController } from '../controllers/PoolController';
+import { CountPoolController } from '../controllers/CountPoolController';
+import { CreatePoolController } from '../controllers/CreatePoolController';
 
 const PoolRoutes = Router();
 
-const poolController = new PoolController();
+const countPoolController = new CountPoolController();
+const createPoolController = new CreatePoolController();
 
-PoolRoutes.get('/count', poolController.handle);
+PoolRoutes.get('/count', countPoolController.handle);
+PoolRoutes.post('/', createPoolController.handle);
 
 export { PoolRoutes }
