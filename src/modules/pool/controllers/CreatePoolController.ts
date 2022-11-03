@@ -5,8 +5,8 @@ const createPoolService = new CreatePoolService();
 
 class CreatePoolController {
     async handle(req: Request, res: Response): Promise<Response> {
-        const { title, code } = req.body;
-        return res.status(201).json(await createPoolService.execute(title, code));
+        const { title } = req.body;
+        return res.status(201).json(await createPoolService.execute(title));
     }
 }
 
