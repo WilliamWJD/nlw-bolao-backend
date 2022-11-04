@@ -1,4 +1,5 @@
 import { prisma } from "../../../database/prismaClient";
+import { UserResponseDto } from "../dtos/UserResponseDto";
 import { ApiGoogleResponse } from "../services/AuthService";
 
 class UserRepository {
@@ -7,10 +8,16 @@ class UserRepository {
         return count;
     }
 
-    async findUserByGoogleId(googleId: string) {
+    async findUserByGoogleId(googleId: string): Promise<UserResponseDto | null> {
         return await prisma.user.findUnique({
             where: {
                 googleId: googleId
+            },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                avatarUrl: true
             }
         })
     }
