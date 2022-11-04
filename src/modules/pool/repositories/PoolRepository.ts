@@ -6,11 +6,12 @@ class PoolRepository {
         return count;
     }
 
-    async createPool(title: string, code: string) {
+    async createPool(title: string, code: string, ownerId: string) {
         return await prisma.pool.create({
             data: {
                 title,
-                code
+                code,
+                ownerId
             }
         })
     }
