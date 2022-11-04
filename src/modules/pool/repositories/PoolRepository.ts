@@ -11,7 +11,12 @@ class PoolRepository {
             data: {
                 title,
                 code,
-                ownerId
+                ownerId,
+                participants: {
+                    create: {
+                        userId: ownerId
+                    }
+                }
             }
         })
     }
