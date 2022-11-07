@@ -80,6 +80,38 @@ class PoolRepository {
             }
         })
     }
+
+    async getPoolBydId(id: string) {
+        return await prisma.pool.findUnique({
+            where: {
+                id
+            },
+            include: {
+                _count: {
+                    select: {
+                        participants: true
+                    }
+                },
+                participants: {
+                    select: {
+                        id: true,
+                        user: {
+                            select: {
+                                avatarUrl: true
+                            }
+                        },
+                    },
+                    take: 4
+                },
+                owner: {
+                    select: {
+                        id: true,
+                        name: true,
+                    }
+                }
+            }
+        })
+    }
 }
 
 export { PoolRepository };
