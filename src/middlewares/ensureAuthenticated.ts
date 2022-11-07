@@ -8,11 +8,13 @@ interface TokenPayload {
 }
 
 export function ensureAuthenticated(req: Request, res: Response, next: NextFunction) {
-    const token = req.headers.authorization;
+    const authHeader = req.headers.authorization;
 
-    if (!token) {
+    if (!authHeader) {
         throw Error("JWT Token is missing");
     }
+
+    const [, token] = authHeader.split(' ');
 
     try {
         const decoded = verify(token, 'nlwcopa');

@@ -44,6 +44,42 @@ class PoolRepository {
             }
         })
     }
+
+    async getPoolsByUser(userId: string) {
+        return await prisma.pool.findMany({
+            where: {
+                participants: {
+                    some: {
+                        userId: userId
+                    }
+                }
+            },
+            include: {
+                _count: {
+                    select: {
+                        participants: true
+                    }
+                },
+                participants: {
+                    select: {
+                        id: true,
+                        user: {
+                            select: {
+                                avatarUrl: true
+                            }
+                        },
+                    },
+                    take: 4
+                },
+                owner: {
+                    select: {
+                        id: true,
+                        name: true,
+                    }
+                }
+            }
+        })
+    }
 }
 
 export { PoolRepository };
