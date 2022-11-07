@@ -20,6 +20,30 @@ class PoolRepository {
             }
         })
     }
+
+    async findPoolByCode(code: string, userId: string) {
+        return await prisma.pool.findUnique({
+            where: {
+                code
+            },
+            include: {
+                participants: {
+                    where: {
+                        userId
+                    }
+                }
+            }
+        })
+    }
+
+    async createParticipant(poolId: string, userId: string) {
+        await prisma.participant.create({
+            data: {
+                poolId,
+                userId
+            }
+        })
+    }
 }
 
 export { PoolRepository };
